@@ -284,7 +284,7 @@ Takeaways:
 
 -We were able to determine that FitBit users mostly use their trackers to track calories burned, steps taken, and general activity.  However, not many users log their sleep and even fewer log their weight.  Looking for trends and how non-Bellabeat users use their trackers was a key ask from the stakeholders
 
--This information could be helpful for Bellabeat marketing in several ways:
+-This information could be helpful for Bellabeat marketing in several ways
 
           -First, the other Bellabeat products are already tracking activity like other devices.  Which fits in line with the most important features that non-Bellabeat customers            use.
           
