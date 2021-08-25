@@ -221,11 +221,14 @@ daily_activity %>%
  ##What is the relationship between steps and sedentary minutes?
  ```{r}
  ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes)) + geom_point()
- 
+
+
 
 
  
  ```
+ ![image](https://user-images.githubusercontent.com/89541893/130853287-f85e86af-0942-4b33-988b-e6b8783c991a.png)
+
  ##What is the relationship between steps and sedentary minutes?
  ```{r}
  ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point()
