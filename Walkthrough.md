@@ -286,10 +286,10 @@ We were able to determine that FitBit users mostly use their trackers to track c
 
 This information could be helpful for Bellabeat marketing in several ways
 
-          First, the other Bellabeat products are already tracking activity like other devices.  Which fits in line with the most important features that non-Bellabeat customers             use.
+First, the other Bellabeat products are already tracking activity like other devices.  Which fits in line with the most important features that non-Bellabeat customers             use.
+
+Second, Bellabeat could examine how often THEIR users are sleeping or tracking their weight.  Since other product users don't seem to be doing that a lot, Bellabeat can 
+examine if they have a majority of market share on smart device users that DO track their weight and sleep.
           
-          Second, Bellabeat could examine how often THEIR users are sleeping or tracking their weight.  Since other product users don't seem to be doing that a lot, Bellabeat can 
-          examine if they have a majority of market share on smart device users that DO track their weight and sleep.
-          
-          Third, we know that there is not a correlation between sleep and calories burned.  So not having that relationship exist will give the marketing team more time to focus
-          on the relationships that do matter.  
+Third, we know that there is not a correlation between sleep and calories burned.  So not having that relationship exist will give the marketing team more time to focus
+on the relationships that do matter.  
