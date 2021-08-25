@@ -1,4 +1,4 @@
-# Beallabeat
+# Bellabeat
 Capstone Project for Data Analytics Certificate
 ```{r}
 install.packages('tidyverse')
@@ -6,11 +6,13 @@ library(tidyverse)
 ```
 
 ##After uploading datasets, we rename them for ease of use
+```{r}
 daily_activity <- read.csv("dailyActivity_merged.csv")
 daily_calories <- read.csv("dailyCalories_merged.csv")
 sleep_day <- read.csv("sleepDay_merged.csv")
 daily_intensities <- read.csv("dailyIntensities_merged.csv")
 weight_log <- read.csv("weightLogInfo_merged.csv")
+```
 
 ##Preview tables 
 head(daily_activity)
