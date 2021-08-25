@@ -1,10 +1,25 @@
-# Bellabeat
+# Bellbeat
 Capstone Project for Data Analytics Certificate
+
+In this case study, the task was to improve the marketing strategy for a wearable fitness tracker company, Bellabeat.  Bellabeat asked to examine customer activity compared to other trackers such as FitBit.  R Programming language was used due to the large amounts of data collected.  
+
+Overall, the goals of this project were to:
+-See how customers use their fitbit in their daily lives
+-Examine the most used features
+-Look at what features Bellabeat should consider adding
+
+First, the tidyverse package was installed to help make the program run cleaner.  
+
 ```{r}
 install.packages('tidyverse')
 library(tidyverse)
 ```
-##After uploading datasets, we rename them for ease of use
+
+The first dataset we’ll be looking at comes from here: https://www.kaggle.com/arashnic/fitbit
+
+There are a number of different csv files that range from Daily activity, calories, steps; hourly calories, intensities, and steps; and heart rate, sleep data and weight logs.
+
+After uploading datasets, we rename them for ease of use
 ```{r}
 daily_activity <- read.csv("dailyActivity_merged.csv")
 daily_calories <- read.csv("dailyCalories_merged.csv")
@@ -12,7 +27,8 @@ sleep_day <- read.csv("sleepDay_merged.csv")
 daily_intensities <- read.csv("dailyIntensities_merged.csv")
 weight_log <- read.csv("weightLogInfo_merged.csv")
 ```
-##Preview tables 
+
+Preview tables: this is necessary so we understand what kind of information we are working with.  We can learn a lot by looking at the column names.  
 ```{r}
 head(daily_activity)
           Id ActivityDate TotalSteps TotalDistance TrackerDistance
@@ -155,7 +171,7 @@ head(weight_log)
 5 1.463098e+12
 6 1.460938e+12
 ```
-##How many distinct users in each frame?
+How many distinct users in each frame?  The number in each data table don't match up.  This tells us that not everyone uses every feature, and that there is a hierarchy of what  features people will use.  
 ```{r}
 n_distinct(daily_activity$Id)
 [1] 33
@@ -168,7 +184,7 @@ n_distinct(daily_intensities$Id)
 n_distinct(weight_log$Id)
 [1] 8
 ```
-##How many observations are there in each data frame
+How many observations are there in each data frame?  It's a similar story to the number of distinct users.  There exists a hierarcy of what features people will us and how often they use them.  
 ```{r}
 nrow(daily_activity)
 [1] 940
@@ -180,8 +196,13 @@ nrow(daily_intensities)
 [1] 940
 nrow(weight_log)
 [1] 67
+```
+
+One of the key takeaways is that the 'ID' field has been used in every dataset.  Furthermore, daily_calories, daily_intensities, and daily_activity all have the same number of observations.  
+
+
+It's also important to look through some statistics as well
 ```{r}
-##Summary statistics
 daily_activity %>%  
   select(TotalSteps,
           TotalDistance,
@@ -218,45 +239,53 @@ daily_activity %>%
  3rd Qu.:187.5   3rd Qu.:25.56  
  Max.   :294.3   Max.   :47.54 
  ```
- ##What is the relationship between steps and sedentary minutes?
- ```{r}
- ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes)) + geom_point()
-
-
-
-
  
- ```
- ![image](https://user-images.githubusercontent.com/89541893/130853287-f85e86af-0942-4b33-988b-e6b8783c991a.png)
+ Now that we have looked through our data, we should plot a few different variables to help determine some relationships.  
+ 
+ To start, it's important to lookg at the relationship between sedentary minutes, calories burned, and steps taken.
 
- ##What is the relationship between steps and sedentary minutes?
  ```{r}
  ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point()
- 
+
+
  ```
- ##What about steps and calories burned?
+![image](https://user-images.githubusercontent.com/89541893/130853642-4b4c23a4-f5e1-44bf-8756-1567f2075b93.png)
+From the above image, we can see that there appears to be an inverse relationship between sedentary minutes and steps taken.  The further right we go on the graph however, we can see more calories burned with more steps taken. 
+
+ What about steps and calories burned?  Let's closely examine the relationship between those two.
  ```{r}
  ggplot(data=daily_activity, aes(x=TotalSteps, y = Calories))+ geom_point() + stat_smooth(method=lm)
 `geom_smooth()` using formula 'y ~ x'
 
 ```
- ##Lets examine how sleep might affect calories burned
+![image](https://user-images.githubusercontent.com/89541893/130854006-3065798a-25d7-45ff-8ec4-70ca7a46db94.png)
+There is an obvious positive correlation between steps taken, and calories burned.  One of the benefits of discovering this, is it can be marketed that simply moving will help with burning calories.  
+
+Lets examine how sleep might affect calories burned.  We are also combining this data to check how many people are tracking their sleep.
  ```{r}
  combined_data <- merge(sleep_day, daily_activity, by="Id")
  n_distinct(combined_data$Id)
 [1] 24
- ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = Calories))+ geom_point() + stat_smooth(method=lm)
-`geom_smooth()` using formula 'y ~ x'
- ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = Calories))+ geom_point()
- ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = Calories))
- ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = Calories))+ geom_point()
+ ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = TotalTimeInBed, color = Calories))+ geom_point()
  ```
+ ![image](https://user-images.githubusercontent.com/89541893/130860299-b29c1c55-ea12-4ddd-9252-5a16f670a622.png)
+ 
+ Based on the graph above, we don't really see much correlation between sleeping enough, staying in bed for longer periods of time, and calories burned.  However, this is still useful becuase we know that not all of our users track their sleep like they do steps, calories burned, or activity.  
+
  ##What about intense workouts and calories burned?
  ```{r}
- 
- 
- ##What about intense workouts and calories burned?
  ggplot(data = daily_activity, aes(x=VeryActiveMinutes, y=Calories)) + geom_point() + stat_smooth(method = lm)
 `geom_smooth()` using formula 'y ~ x'
  
 ```
+![image](https://user-images.githubusercontent.com/89541893/130854707-3046d9dc-213d-492b-95b7-dd7617d67b19.png)
+
+Takeaways:
+
+-We were able to determine that FitBit users mostly use their trackers to track calories burned, steps taken, and general activity.  However, not many users log their sleep and even fewer log their weight.  Looking for trends and how non-Bellabeat users use their trackers was a key ask from the stakeholders
+-This information could be helpful for Bellabeat marketing in several ways:
+          -First, the other Bellabeat products are already tracking activity like other devices.  Which fits in line with the most important features that non-Bellabeat customers            use.
+          -Second, Bellabeat could examine how often THEIR users are sleeping or tracking their weight.  Since other product users don't seem to be doing that a lot, Bellabeat can 
+          examine if they have a majority of market share on smart device users that DO track their weight and sleep.
+          -Third, we know that there is not a correlation between sleep and calories burned.  So not having that relationship exist will give the marketing team more time to focus
+          on the relationships that do matter.  
