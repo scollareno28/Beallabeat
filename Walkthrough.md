@@ -245,20 +245,19 @@ daily_activity %>%
  To start, it's important to lookg at the relationship between sedentary minutes, calories burned, and steps taken.
 
  ```{r}
- ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point()
+ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point() +ggtitle("Sedentary Minutes vs Total Steps")
 
 
  ```
-![image](https://user-images.githubusercontent.com/89541893/130853642-4b4c23a4-f5e1-44bf-8756-1567f2075b93.png)
+![image](https://user-images.githubusercontent.com/89541893/130973513-4e5246d0-ac81-4127-919c-f8972d2c0d7d.png)
 From the above image, we can see that there appears to be an inverse relationship between sedentary minutes and steps taken.  The further right we go on the graph however, we can see more calories burned with more steps taken. 
 
  What about steps and calories burned?  Let's closely examine the relationship between those two.
  ```{r}
- ggplot(data=daily_activity, aes(x=TotalSteps, y = Calories))+ geom_point() + stat_smooth(method=lm)
+ggplot(data=daily_activity, aes(x=TotalSteps, y = Calories))+ geom_point() + stat_smooth(method=lm) +ggtitle("Total Steps vs Calories")
 `geom_smooth()` using formula 'y ~ x'
 
-```
-![image](https://user-images.githubusercontent.com/89541893/130854006-3065798a-25d7-45ff-8ec4-70ca7a46db94.png)
+```![image](https://user-images.githubusercontent.com/89541893/130973830-5cac87a9-b829-4cca-8498-bf96953d75eb.png)
 There is an obvious positive correlation between steps taken, and calories burned.  One of the benefits of discovering this, is it can be marketed that simply moving will help with burning calories.  
 
 Lets examine how sleep might affect calories burned.  We are also combining this data to check how many people are tracking their sleep.
@@ -266,19 +265,20 @@ Lets examine how sleep might affect calories burned.  We are also combining this
  combined_data <- merge(sleep_day, daily_activity, by="Id")
  n_distinct(combined_data$Id)
 [1] 24
- ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = TotalTimeInBed, color = Calories))+ geom_point()
+ggplot(data=combined_data, aes(x=TotalMinutesAsleep, y = TotalTimeInBed, color = Calories))+ geom_point() +ggtitle("Total Time in Bed vs Total Time Asleep")
+
  ```
- ![image](https://user-images.githubusercontent.com/89541893/130860299-b29c1c55-ea12-4ddd-9252-5a16f670a622.png)
+![image](https://user-images.githubusercontent.com/89541893/130974067-becb87b4-edc2-42bc-886a-0ad579ea42d1.png)
  
  Based on the graph above, we don't really see much correlation between sleeping enough, staying in bed for longer periods of time, and calories burned.  However, this is still useful becuase we know that not all of our users track their sleep like they do steps, calories burned, or activity.  
 
  ##What about intense workouts and calories burned?
  ```{r}
- ggplot(data = daily_activity, aes(x=VeryActiveMinutes, y=Calories)) + geom_point() + stat_smooth(method = lm)
+ggplot(data = daily_activity, aes(x=VeryActiveMinutes, y=Calories)) + geom_point() + stat_smooth(method = lm) +ggtitle("Calories vs Very Active Minutes")
 `geom_smooth()` using formula 'y ~ x'
  
 ```
-![image](https://user-images.githubusercontent.com/89541893/130854707-3046d9dc-213d-492b-95b7-dd7617d67b19.png)
+![image](https://user-images.githubusercontent.com/89541893/130974329-45c516e0-8ed2-481e-ab67-c771f9b188b9.png)
 
 Takeaways:
 
