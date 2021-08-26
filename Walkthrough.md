@@ -246,8 +246,7 @@ daily_activity %>%
 
  ```{r}
 ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point() +ggtitle("Sedentary Minutes vs Total Steps")
-
-'''
+```
 
 ![image](https://user-images.githubusercontent.com/89541893/130973513-4e5246d0-ac81-4127-919c-f8972d2c0d7d.png)
 
