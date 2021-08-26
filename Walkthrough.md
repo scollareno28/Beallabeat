@@ -246,10 +246,9 @@ daily_activity %>%
 
  ```{r}
 ggplot(data=daily_activity, aes(x=TotalSteps, y=SedentaryMinutes, color = Calories)) + geom_point() +ggtitle("Sedentary Minutes vs Total Steps")
-
-
- ```
+'''
 ![image](https://user-images.githubusercontent.com/89541893/130973513-4e5246d0-ac81-4127-919c-f8972d2c0d7d.png)
+
 From the above image, we can see that there appears to be an inverse relationship between sedentary minutes and steps taken.  The further right we go on the graph however, we can see more calories burned with more steps taken. 
 
  What about steps and calories burned?  Let's closely examine the relationship between those two.
@@ -257,7 +256,8 @@ From the above image, we can see that there appears to be an inverse relationshi
 ggplot(data=daily_activity, aes(x=TotalSteps, y = Calories))+ geom_point() + stat_smooth(method=lm) +ggtitle("Total Steps vs Calories")
 `geom_smooth()` using formula 'y ~ x'
 
-```![image](https://user-images.githubusercontent.com/89541893/130973830-5cac87a9-b829-4cca-8498-bf96953d75eb.png)
+```
+![image](https://user-images.githubusercontent.com/89541893/130973830-5cac87a9-b829-4cca-8498-bf96953d75eb.png)
 There is an obvious positive correlation between steps taken, and calories burned.  One of the benefits of discovering this, is it can be marketed that simply moving will help with burning calories.  
 
 Lets examine how sleep might affect calories burned.  We are also combining this data to check how many people are tracking their sleep.
